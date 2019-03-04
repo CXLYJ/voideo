@@ -42,7 +42,7 @@ public class Swagger2 {
                 // 设置页面标题
                 .title("Spring Boot集成Swagger2接口总览")
                 // 设置接口描述
-                .description("跟金哥一起学学习")
+                .description("跟金哥一起学习springbot")
                 // 设置联系方式
                 .contact("李依金，" + "博客：http://iclyj.cn")
                 // 设置版本

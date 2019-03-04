@@ -3,6 +3,7 @@ package com.lyj.controller;
 import java.util.UUID;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,12 @@ public class RegistLoginController extends BaseController{
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 注册
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "用户注册",notes = "用户注册接口")
 	@PostMapping("/regist")
 	public IMoocJSONResult regist(@RequestBody Users user) throws Exception{
@@ -59,6 +66,12 @@ public class RegistLoginController extends BaseController{
 		return IMoocJSONResult.ok(userVO);
 	}
 	
+	/**
+	 * 登录
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	@ApiOperation(value = "用户登录",notes = "用户登录接口")
 	@PostMapping("/login")
 	public IMoocJSONResult login(@RequestBody Users user) throws Exception{
@@ -76,8 +89,8 @@ public class RegistLoginController extends BaseController{
 		
 		//3.返回
 		if (null != userResult) {
-			user.setPassword("");
-			UserVO userVO = setUserRedisSessionToken(user);
+			userResult.setPassword("");
+			UserVO userVO = setUserRedisSessionToken(userResult);
 			return IMoocJSONResult.ok(userVO);
 		}
 		return IMoocJSONResult.errorMsg("用户名和密码不正确，请重试...");
@@ -91,5 +104,21 @@ public class RegistLoginController extends BaseController{
 		userVO.setUserToken(uuidToken);
 		return userVO;
 	}
+	
+	/**
+	 * 注销
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@ApiOperation(value = "用户注销",notes = "用户注销接口")
+	@ApiImplicitParam(name = "userId", value = "用户id", required = true,
+						dataType = "String", paramType = "query")
+	@PostMapping("/logout")
+	public IMoocJSONResult logout(String userId) throws Exception{
+		redis.del(USER_REDIS_SESSION + ":" + userId);
+		return IMoocJSONResult.errorMsg("用户退出成功");
+	}
+	
 	
 }
