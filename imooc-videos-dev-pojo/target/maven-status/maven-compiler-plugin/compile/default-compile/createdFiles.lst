@@ -1,0 +1,8 @@
+com\lyj\pojo\Videos.class
+com\lyj\pojo\Bgm.class
+com\lyj\pojo\UsersLikeVideos.class
+com\lyj\pojo\Comments.class
+com\lyj\pojo\SearchRecords.class
+com\lyj\pojo\vo\UserVO.class
+com\lyj\pojo\Users.class
+com\lyj\pojo\UsersReport.class

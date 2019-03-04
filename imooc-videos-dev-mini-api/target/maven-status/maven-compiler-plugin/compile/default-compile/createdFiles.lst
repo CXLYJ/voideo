@@ -1,0 +1,5 @@
+com\lyj\controller\BaseController.class
+com\lyj\Application.class
+com\lyj\controller\HelloWorldController.class
+com\lyj\controller\RegistLoginController.class
+com\lyj\Swagger2.class

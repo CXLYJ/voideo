@@ -1,0 +1,7 @@
+com\lyj\mapper\SearchRecordsMapper.class
+com\lyj\mapper\UsersLikeVideosMapper.class
+com\lyj\mapper\BgmMapper.class
+com\lyj\mapper\CommentsMapper.class
+com\lyj\mapper\VideosMapper.class
+com\lyj\mapper\UsersMapper.class
+com\lyj\mapper\UsersReportMapper.class
