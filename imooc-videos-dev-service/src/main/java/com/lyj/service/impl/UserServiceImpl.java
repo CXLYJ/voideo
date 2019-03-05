@@ -16,7 +16,7 @@ import com.lyj.service.UserService;
 /**
  * @author 作者 lyj
  * @version 创建时间：2018年11月6日 下午3:28:44
- * 类说明
+ * 用户实现类
  */
 @Service
 public class UserServiceImpl implements UserService {

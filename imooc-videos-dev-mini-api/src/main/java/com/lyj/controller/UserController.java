@@ -66,6 +66,10 @@ public class UserController extends BaseController{
 			if (files != null && files.length > 0) {
 				
 				String fileName = files[0].getOriginalFilename();
+				//对文件进行重命名
+				String b = fileName.substring(0,fileName.lastIndexOf("."));
+				String newFileName = userId + "_" + System.currentTimeMillis();
+				fileName = fileName.replace(b,newFileName);
 				if (StringUtils.isNotBlank(fileName)) {
 					// 文件上传的最终保存路径
 					String finalFacePath = fileSpace + uploadPathDB + "/" + fileName;
@@ -84,11 +88,12 @@ public class UserController extends BaseController{
 						ouFile.getParentFile().mkdirs();
 					}
 					
+					//删除文件夹下的旧文件等待上传新的文件
 					if (deleteFile.exists()) {
 						File[] tempList = deleteFile.listFiles();
 						if (tempList != null) {
 							for (int i = 0; i < tempList.length; i++) {
-								if (tempList[i].isFile() && tempList[i].getName().contains(fileName)) {
+								if (tempList[i].isFile() /*&& tempList[i].getName().contains(fileName)*/) {
 									tempList[i].delete();
 									log.info("删除文件成功...");
 								}
