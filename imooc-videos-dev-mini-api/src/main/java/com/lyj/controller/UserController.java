@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.lyj.pojo.Users;
+import com.lyj.pojo.vo.UserVO;
 import com.lyj.service.UserService;
 import com.lyj.utils.IMoocJSONResult;
 
@@ -127,8 +129,29 @@ public class UserController extends BaseController{
 		user.setFaceImage(uploadPathDB);
 		userService.updateUserInfo(user);
 		
-		return IMoocJSONResult.ok();
+		return IMoocJSONResult.ok(uploadPathDB);
 	}
 	
+	
+	/**
+	 * 查询用户信息
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	@ApiOperation(value = "查询用户信息",notes = "查询用户信息的接口")
+	@ApiImplicitParam(name = "userId", value = "用户id", required = true,
+						dataType = "String", paramType = "query")
+	@PostMapping("/query")
+	public IMoocJSONResult uploadface(String userId) throws Exception{
+		if (StringUtils.isBlank(userId)) {
+			return IMoocJSONResult.errorMsg("用户id不能为空...");
+		}
+		Users userInfo = userService.queryUserInfo(userId);
+		UserVO userVO = new UserVO();
+		BeanUtils.copyProperties(userInfo, userVO);
+		
+		return IMoocJSONResult.ok(userVO);
+	}
 	
 }

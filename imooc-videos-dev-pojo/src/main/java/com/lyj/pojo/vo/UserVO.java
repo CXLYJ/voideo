@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @ApiModel(value = "用户注册对象",description = "这是用户对象")
 public class UserVO {
 	
@@ -30,8 +32,11 @@ public class UserVO {
      * name 属性名称
      * example 属性的示例值。
      * required 指定是否需要参数。
+     * 
+     * @JsonIgnore 防止参数传出
      */
     @ApiModelProperty(value = "密码",name = "password",example = "123456",required = true)
+    @JsonIgnore
     private String password;
 
     /**
