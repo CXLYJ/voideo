@@ -30,7 +30,7 @@ import com.lyj.utils.IMoocJSONResult;
 public class VideoController {
 
 	/**
-	 * 用户上传头像
+	 * 上传视频
 	 * @param userId
 	 * @return
 	 * @throws Exception
