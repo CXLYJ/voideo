@@ -7,6 +7,7 @@ import java.io.InputStream;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -49,9 +50,12 @@ public class UserController extends BaseController{
 	@ApiOperation(value = "用户上传头像",notes = "用户上传头像的接口")
 	@ApiImplicitParam(name = "userId", value = "用户id", required = true,
 						dataType = "String", paramType = "query")
-	@PostMapping("/uploadFace")
-	public IMoocJSONResult uploadface(String userId,  
-			@RequestParam(value = "file")MultipartFile[] files) throws Exception{
+	@PostMapping(value = "/uploadFace",headers="content-type=multipart/form-data")
+	public IMoocJSONResult uploadface(
+			@ApiParam(value = "上传文件",required = true)
+			@RequestParam(value = "userId", required = true)String userId,  
+			@RequestParam(value = "file", required = true)MultipartFile[] files
+			) throws Exception{
 		
 		if (StringUtils.isBlank(userId)) {
 			return IMoocJSONResult.errorMsg("用户id不能为空...");
